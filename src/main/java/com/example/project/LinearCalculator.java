@@ -13,9 +13,9 @@ public class LinearCalculator{
     //You will have to parse the string into 4 integers, representing the 2 points.
     public LinearCalculator(String point1, String point2){ // <--add 2 string parameters to this constructor
      this.x1=Integer.parseInt(point1.substring(1,point1.indexOf(","))); //pull out value of x1
-     this.y1=Integer.parseInt(point1.substring(point1.indexOf(",")+1,point1.indexOf(")"))); 
-     this.x2=Integer.parseInt(point2.substring(1,point2.indexOf(","))); 
-     this.y2=Integer.parseInt(point2.substring(point2.indexOf(",")+1,point2.indexOf(")"))); 
+     this.y1=Integer.parseInt(point1.substring(point1.indexOf(",")+1,point1.indexOf(")"))); //pull out value of y1
+     this.x2=Integer.parseInt(point2.substring(1,point2.indexOf(","))); //pull out value of x2
+     this.y2=Integer.parseInt(point2.substring(point2.indexOf(",")+1,point2.indexOf(")"))); //pull out value of y2
     }
 
 
@@ -26,6 +26,7 @@ public class LinearCalculator{
     public int getY1(){return y1;}
     public int getX2(){return x2;}
     public int getY2(){return y2;}
+    /*set int x1,2 y1,2 to a val */
     public void setX1(int x1){this.x1 = x1;}
     public void setY1(int y1){this.y1 = y1;}
     public void setX2(int x2){this.x2 = x2;}
@@ -35,24 +36,24 @@ public class LinearCalculator{
     //distance() -> returns a double. 
     //calculates the distance between the two points to the nearest HUNDREDTH and returns the value.
     public double distance(){
-        double dist = Math.sqrt(Math.pow((x2 - x1),2) + Math.pow((y2 - y1),2));
-        return roundedToHundredth(dist);
+        double dist = Math.sqrt(Math.pow((x2 - x1),2) + Math.pow((y2 - y1),2));//distance formula
+        return roundedToHundredth(dist); //round to 100th place
     }
     //yInt() -> returns a double.
     //calculates the y intercept of the equation and returns the value to the nearest HUNDREDTH
     //if y-int if undefined, should return -999.99
     public double yInt(){
         double slope = slope();
-        if (slope == -999.99){return -999.99;}
-        return roundedToHundredth (y1 - slope()* x1);
+        if (slope == -999.99){return -999.99;} //slope method
+        return roundedToHundredth (y1 - slope()* x1); 
     }
 
     //slope() -> returns a double. 
     //calculates the slope of the equations and returns the value to the nearest HUNDREDTH
     //if slope is undefined, should return -999.99
     public double slope(){
-       if (x2-x1 == 0){return -999.99;}
-       double slope =(double) (y2-y1)/(x2-x1);
+       if (x2-x1 == 0){return -999.99;} //if denominator is 0 the slope will be UNF, return -999.99
+       double slope =(double) (y2-y1)/(x2-x1); 
        return roundedToHundredth(slope);
     }
 
@@ -62,9 +63,9 @@ public class LinearCalculator{
     //HINT: You may need other custom methods to decrease the amount of code in the equations() method
     public String equation(){
     if (yInt() == -999.99) {return "undefined";}
-    else if (yInt() == 0) {return "y=" + slope() + "x";}
-    else if (slope() == 0) {return "y=" + yInt();}
-    else if (yInt() < 0) {return "y=" + slope() + "x" + yInt();}
+    else if (yInt() == 0) {return "y=" + slope() + "x";} //only return function with slope
+    else if (slope() == 0) {return "y=" + yInt();} //only return function with y-int
+    else if (yInt() < 0) {return "y=" + slope() + "x" + yInt();} //if y-int is negetive then no need to print out + after x
     else {return "y=" + slope() + "x+" + yInt();} 
     }
 
@@ -88,7 +89,4 @@ public class LinearCalculator{
  
         return str;
     }
-
-
-
 }
